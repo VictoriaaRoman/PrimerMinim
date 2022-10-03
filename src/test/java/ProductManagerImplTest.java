@@ -1,8 +1,7 @@
 import java.util.List;
-import org.example.Order;
-import org.example.Product;
-import org.example.User;
-import org.example.ProductManager;
+
+import models.Order;
+import models.Product;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +12,7 @@ public class ProductManagerImplTest {
 
     @Before
     public void setUp() {
-        pm = new ProductManagerImpl();
+        pm = (ProductManager) new ProductManagerImpl();
         pm.addUser("1111111", "Juan", "lopez");
         pm.addUser("2222222",  "David", "Rincon");
         pm.addUser("3333333",  "Juan", "Hernández");
