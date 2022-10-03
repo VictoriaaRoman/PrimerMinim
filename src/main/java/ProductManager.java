@@ -1,4 +1,6 @@
-package org.example;
+import models.Order;
+import models.Product;
+
 import java.util.List;
 
 public interface ProductManager {

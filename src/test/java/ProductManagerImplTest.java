@@ -1,8 +1,7 @@
 import java.util.List;
-import org.example.Order;
-import org.example.Product;
-import org.example.User;
-import org.example.ProductManager;
+
+import models.Order;
+import models.Product;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
