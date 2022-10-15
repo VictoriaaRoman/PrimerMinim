@@ -1,35 +1,48 @@
-import jdk.internal.icu.text.UnicodeSet;
 import models.Order;
 import models.Product;
 import models.User;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class ProductManagerImpl implements ProductManager{
-    List<Product> products;
-    HashMap<String, User> users;
-    Queue<Order> orders;
+
+    List<Product> listProducts;
+    HashMap<String, User> listUsers;
+    Queue<Order> listOrders;
+    public ProductManagerImpl (){
+        this.listProducts = new ArrayList<>();
+        this.listUsers = new HashMap<>();
+        this.listOrders = new LinkedList<>();
+    }
 
     @Override
     public List<Product> productsByPrice() {
-        return null;
+        List<Product> list = listProducts;
+        //Ordenar per preus
+        return list;
     }
 
     @Override
     public List<Product> productsBySales() {
-        return null;
+        List<Product> list = listProducts;
+        //Ordenar per ventes
+        return list;
     }
 
     @Override
     public void addOrder(Order order) {
-        this.orders.add(order);
+        this.listOrders.add(order);
 
     }
 
     @Override
     public Order processOrder() {
+
+        Order order = listOrders.get(0);
+        String userId = order.getUserId();
+
+
+
         return null;
     }
 
@@ -39,12 +52,15 @@ public class ProductManagerImpl implements ProductManager{
     }
 
     @Override
-    public void addUser(String s, String name, String surname) {
-
+    public void addUser(String id, String name, String surname) {
+        User user = new User(id, name, surname);
+        listUsers.add(user);
     }
 
     @Override
     public void addProduct(String productId, String name, double price) {
+        Product product = new Product(productId,name,price);
+        listProducts.add(product);
 
     }
 
@@ -55,22 +71,35 @@ public class ProductManagerImpl implements ProductManager{
 
     @Override
     public int numUsers() {
-        return 0;
+        return listUsers.size();
     }
 
     @Override
     public int numProducts() {
-        return 0;
+        return listProducts.size();
     }
 
     @Override
     public int numOrders() {
-        return 0;
+        return listOrders.size();
     }
 
     @Override
     public int numSales(String b001) {
-        return 0;
+        int numSales = 0;
+        boolean encontrado = false;
+        int i = 0;
+        while ((!encontrado) && (i<listProducts.size())){
+            if(listProducts.get(i).getProductId) == b001){
+                encontrado = true;
+            } else{
+                i++;
+            }
+        }
+        if (encontrado){
+            numSales = listProducts.get(i).getNumSales();
+        }
+        return numSales;
     }
 }
 
