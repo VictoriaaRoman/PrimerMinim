@@ -1,15 +1,18 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    private String userID;
+    private String userId;
     private String name;
     private String surname;
+    private List<Order> userOrders;
 
-    public void addOrder(Order o) {
+    public User (String id, String name, String surname){
+        this.userId = id;
+        this.name = name;
+        this.surname = surname;
+        this.userOrders = new ArrayList<Order>();
     }
-
-
-    private List<>
 }

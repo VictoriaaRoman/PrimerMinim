@@ -1,15 +1,21 @@
 package models;
+import java.util.ArrayList;
 
 public class Product {
-    public String getProductId() {
-    }
+    private String productId;
+    private String name;
+    private double price;
+    private int numSales;
 
-    public double getPrice() {
+    public Product (String id, String name, double price){
+        this.productId = id;
+        this.name = name;
+        this.price = price;
     }
-
-    public String getDescription() {
+    public String getProductId (){
+        return this.productId;
     }
-
-    public int getNumSales() {
+    public int getNumSales (){
+        return this.numSales;
     }
 }
