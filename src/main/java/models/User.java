@@ -15,4 +15,36 @@ public class User {
         this.surname = surname;
         this.userOrders = new ArrayList<Order>();
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public List<Order> getUserOrders() {
+        return userOrders;
+    }
+
+    public void setUserOrders(List<Order> userOrders) {
+        this.userOrders = userOrders;
+    }
 }

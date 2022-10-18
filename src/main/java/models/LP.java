@@ -1,15 +1,22 @@
 package models;
 
 public class LP {
-    private int quant;
+    private int quantity;
     private String productId;
     public LP (int q, String prod){
-        this.quant = q;
+        this.quantity = q;
         this.productId = prod;
     }
-    public int getQuantity() {
-        return this.quant;
+    public int getQuantity() {return quantity;}
+
+    public void setQuantity(int quant) {
+        this.quantity = quant;
     }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     public String getProductId() {
         return this.productId;
     }

@@ -68,7 +68,7 @@ public class ProductManagerImplTest {
 
     }
 
-   /* @Test
+    @Test
     public void processOrderTest() {
         Assert.assertEquals(3, this.pm.numUsers());
         Assert.assertEquals(4, this.pm.numProducts());
@@ -88,7 +88,6 @@ public class ProductManagerImplTest {
         Assert.assertEquals(0, this.pm.numOrders());
         Assert.assertEquals(7, this.pm.numSales("B001"));
     }
-*/
 
     @Test
     public void productsSortByPrice() {

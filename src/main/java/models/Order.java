@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Order {
     private String userId;
-    private List<LP> listProducts;
+    List<LP> listProducts;
     public Order(String id){
         listProducts = new ArrayList<LP>();
         this.userId = id;
@@ -14,9 +14,22 @@ public class Order {
         listProducts.add(new LP(q, product));
     };
 
-    public Object getLP(int i) {
+    public LP getLP(int i) {
         return listProducts.get(i);
     };
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public List<LP> getListProducts() {
+        return listProducts;
+    }
+
+    public void setListProducts(List<LP> listProducts) {
+        this.listProducts = listProducts;
+    }
+
     public String getUserId (){
         return userId;
     }

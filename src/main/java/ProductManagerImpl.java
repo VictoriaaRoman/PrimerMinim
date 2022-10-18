@@ -1,3 +1,4 @@
+import models.LP;
 import models.Order;
 import models.Product;
 import models.User;
@@ -14,6 +15,34 @@ public class ProductManagerImpl implements ProductManager {
         this.listProducts = new ArrayList<>();
         this.listUsers = new HashMap<>();
         this.listOrders = new LinkedList<>();
+    }
+    public Product getProduct(String productId) {
+        boolean encontrado = false;
+        int i = 0;
+        Product product = null;
+        while ((!encontrado) && (i < listProducts.size())) {
+            product = listProducts.get(i);
+
+            if (product.getProductId().equals(productId)) {
+                encontrado = true;
+            }
+            i++;
+        }
+        return (encontrado ? product : null);
+    }
+    public User getUser(String userId) {
+        boolean encontrado = false;
+        int i = 0;
+        User user = null;
+        while ((!encontrado) && (i < listUsers.size())) {
+            user = listUsers.get(i);
+
+            if (user.getUserId().equals(userId)) {
+                encontrado = true;
+            }
+            i++;
+        }
+        return (encontrado ? user : null);
     }
 
     @Override
@@ -35,13 +64,29 @@ public class ProductManagerImpl implements ProductManager {
         this.listOrders.add(order);
 
     }
-
     @Override
     public Order processOrder() {
 
         Order order = listOrders.peek();
         String userId = order.getUserId();
-        return null;
+        User user = getUser(userId);
+        //cojemos lista que tenia el usuario, añadimos la nueva orden y actualizamos
+        List<Order> listOrdersActual = user.getUserOrders();
+        listOrdersActual.add(order);
+        user.setUserOrders(listOrdersActual);
+
+        //extraemos de orden LP
+        List<LP> lista = order.getListProducts();
+        for (int i=0;i < lista.size(); i++){
+            String id = lista.get(i).getProductId();
+            int quantity = lista.get(i).getQuantity();
+            Product product = getProduct(id);
+            if (product != null) {
+                int numSaleActual = product.getNumSales();
+                product.setNumSales(numSaleActual+quantity);
+            }
+        }
+        return listOrders.peek();
     }
 
     @Override
@@ -78,24 +123,6 @@ public class ProductManagerImpl implements ProductManager {
         return listOrders.size();
     }
 
-    public Product getProduct(String productId) {
-        boolean encontrado = false;
-        int i = 0;
-        Product product = null;
-        while ((!encontrado) && (i < listProducts.size())) {
-            product = listProducts.get(i);
-
-            if (product.getProductId().equals(productId)) {
-                encontrado = true;
-
-            }
-            i++;
-        }
-
-        return (encontrado ? product : null);
-
-    }
-
     @Override
     public int numSales(String productId) {
         int numSales = 0;
@@ -104,7 +131,5 @@ public class ProductManagerImpl implements ProductManager {
             numSales = product.getNumSales();
         }
         return numSales;
-
     }
-
 }
