@@ -4,12 +4,13 @@ import models.User;
 
 import java.util.*;
 
-public class ProductManagerImpl implements ProductManager{
+public class ProductManagerImpl implements ProductManager {
 
     List<Product> listProducts;
     HashMap<String, User> listUsers;
     Queue<Order> listOrders;
-    public ProductManagerImpl (){
+
+    public ProductManagerImpl() {
         this.listProducts = new ArrayList<>();
         this.listUsers = new HashMap<>();
         this.listOrders = new LinkedList<>();
@@ -18,14 +19,14 @@ public class ProductManagerImpl implements ProductManager{
     @Override
     public List<Product> productsByPrice() {
         List<Product> list = listProducts;
-        //Ordenar per preus
+        list.sort((p1,p2)-> Double.compare(p1.getPrice(), p2.getPrice()));
         return list;
     }
 
     @Override
     public List<Product> productsBySales() {
         List<Product> list = listProducts;
-        //Ordenar per ventes
+        list.sort((p1,p2)-> Double.compare(p1.getNumSales(), p2.getNumSales()));
         return list;
     }
 
@@ -38,11 +39,8 @@ public class ProductManagerImpl implements ProductManager{
     @Override
     public Order processOrder() {
 
-        Order order = listOrders.get(0);
+        Order order = listOrders.peek();
         String userId = order.getUserId();
-
-
-
         return null;
     }
 
@@ -54,20 +52,16 @@ public class ProductManagerImpl implements ProductManager{
     @Override
     public void addUser(String id, String name, String surname) {
         User user = new User(id, name, surname);
-        listUsers.add(user);
+        listUsers.put(id,user);
     }
 
     @Override
     public void addProduct(String productId, String name, double price) {
-        Product product = new Product(productId,name,price);
+        Product product = new Product(productId, name, price);
         listProducts.add(product);
 
     }
 
-    @Override
-    public Product getProduct(String productId) {
-        return null;
-    }
 
     @Override
     public int numUsers() {
@@ -84,22 +78,33 @@ public class ProductManagerImpl implements ProductManager{
         return listOrders.size();
     }
 
-    @Override
-    public int numSales(String b001) {
-        int numSales = 0;
+    public Product getProduct(String productId) {
         boolean encontrado = false;
         int i = 0;
-        while ((!encontrado) && (i<listProducts.size())){
-            if(listProducts.get(i).getProductId) == b001){
+        Product product = null;
+        while ((!encontrado) && (i < listProducts.size())) {
+            product = listProducts.get(i);
+
+            if (product.getProductId().equals(productId)) {
                 encontrado = true;
-            } else{
-                i++;
+
             }
+            i++;
         }
-        if (encontrado){
-            numSales = listProducts.get(i).getNumSales();
+
+        return (encontrado ? product : null);
+
+    }
+
+    @Override
+    public int numSales(String productId) {
+        int numSales = 0;
+        Product product = getProduct(productId);
+        if (product != null) {
+            numSales = product.getNumSales();
         }
         return numSales;
-    }
-}
 
+    }
+
+}
