@@ -105,7 +105,6 @@ public class ProductManagerImplTest {
         Assert.assertEquals("A002", products.get(3).getProductId());
         Assert.assertEquals(2.25, products.get(3).getPrice(), 0);
     }
-/*
     @Test
     public void productsSortByNumSales() {
         processOrderTest();
@@ -127,7 +126,6 @@ public class ProductManagerImplTest {
         Assert.assertEquals("Coca cola", products.get(3).getDescription());
         Assert.assertEquals(7, products.get(3).getNumSales());
     }
-/*
     @Test
     public void ordersByUserTest() {
         processOrderTest();
@@ -137,5 +135,5 @@ public class ProductManagerImplTest {
         List<Order> orders2 = this.pm.ordersByUser("2222222");
         Assert.assertEquals(1, orders2.size());
 
-    } */
+    }
 }

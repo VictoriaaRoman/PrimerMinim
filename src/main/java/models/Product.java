@@ -4,6 +4,16 @@ import java.util.ArrayList;
 public class Product {
     private String productId;
     private String name;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private double price;
     private int numSales;
 

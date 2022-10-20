@@ -30,21 +30,6 @@ public class ProductManagerImpl implements ProductManager {
         }
         return (encontrado ? product : null);
     }
-    public User getUser(String userId) {
-        boolean encontrado = false;
-        int i = 0;
-        User user = null;
-        while ((!encontrado) && (i < listUsers.size())) {
-            user = listUsers.get(i);
-
-            if (user.getUserId().equals(userId)) {
-                encontrado = true;
-            }
-            i++;
-        }
-        return (encontrado ? user : null);
-    }
-
     @Override
     public List<Product> productsByPrice() {
         List<Product> list = listProducts;
@@ -69,7 +54,7 @@ public class ProductManagerImpl implements ProductManager {
 
         Order order = listOrders.peek();
         String userId = order.getUserId();
-        User user = getUser(userId);
+        User user = listUsers.get(userId);
         //cojemos lista que tenia el usuario, añadimos la nueva orden y actualizamos
         List<Order> listOrdersActual = user.getUserOrders();
         listOrdersActual.add(order);
@@ -86,12 +71,13 @@ public class ProductManagerImpl implements ProductManager {
                 product.setNumSales(numSaleActual+quantity);
             }
         }
-        return listOrders.peek();
+        return listOrders.remove();
     }
 
     @Override
     public List<Order> ordersByUser(String userId) {
-        return null;
+        User user = listUsers.get(userId);
+        return user.getUserOrders();
     }
 
     @Override
