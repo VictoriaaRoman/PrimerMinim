@@ -9,27 +9,6 @@ import org.junit.Test;
 
 public class ProductManagerImplTest {
     ProductManager pm;
-
-    @Before
-    public void setUp() {
-        pm = (ProductManager) new ProductManagerImpl();
-        pm.addUser("1111111", "Juan", "lopez");
-        pm.addUser("2222222",  "David", "Rincon");
-        pm.addUser("3333333",  "Juan", "Hernández");
-
-        pm.addProduct("B001", "Coca cola", 2);
-        pm.addProduct("C002", "Café amb gel", 1.5);
-        pm.addProduct("A002", "Donut", 2.25);
-        pm.addProduct("A003", "Croissant", 1.25);
-
-        prepareOrders();
-    }
-
-    @After
-    public void tearDown() {
-        this.pm = null;
-    }
-
     private void prepareOrders() {
         Order o1 = new Order("1111111");
         o1.addLP(3, "B001");
@@ -52,6 +31,27 @@ public class ProductManagerImplTest {
         this.pm.addOrder(o3);
         Assert.assertEquals(3, this.pm.numOrders());
     }
+    @Before
+    public void setUp() {
+        pm = (ProductManager) new ProductManagerImpl();
+        pm.addUser("1111111", "Juan", "lopez");
+        pm.addUser("2222222",  "David", "Rincon");
+        pm.addUser("3333333",  "Juan", "Hernández");
+
+        pm.addProduct("B001", "Coca cola", 2);
+        pm.addProduct("C002", "Café amb gel", 1.5);
+        pm.addProduct("A002", "Donut", 2.25);
+        pm.addProduct("A003", "Croissant", 1.25);
+
+        prepareOrders();
+    }
+
+    @After
+    public void tearDown() {
+        this.pm = null;
+    }
+
+
 
     @Test
     public void testAddOrder() {
@@ -111,19 +111,19 @@ public class ProductManagerImplTest {
 
         List<Product> products = this.pm.productsBySales();
         Assert.assertEquals("A003", products.get(0).getProductId());
-        Assert.assertEquals("Croissant", products.get(0).getDescription());
+        Assert.assertEquals("Croissant", products.get(0).getName());
         Assert.assertEquals(0, products.get(0).getNumSales());
 
         Assert.assertEquals("C002", products.get(1).getProductId());
-        Assert.assertEquals("Café amb gel", products.get(1).getDescription());
+        Assert.assertEquals("Café amb gel", products.get(1).getName());
         Assert.assertEquals(2, products.get(1).getNumSales());
 
         Assert.assertEquals("A002", products.get(2).getProductId());
-        Assert.assertEquals("Donut", products.get(2).getDescription());
+        Assert.assertEquals("Donut", products.get(2).getName());
         Assert.assertEquals(5, products.get(2).getNumSales());
 
         Assert.assertEquals("B001", products.get(3).getProductId());
-        Assert.assertEquals("Coca cola", products.get(3).getDescription());
+        Assert.assertEquals("Coca cola", products.get(3).getName());
         Assert.assertEquals(7, products.get(3).getNumSales());
     }
     @Test
